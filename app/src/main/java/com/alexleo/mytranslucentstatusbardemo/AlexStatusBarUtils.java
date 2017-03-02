@@ -21,7 +21,7 @@ public class AlexStatusBarUtils {
      * 创建半透明矩形 View
      *
      * @param alpha 透明值
-     * @return 半透明 View
+     * @return 半透明 Viewa
      */
     private static View createTranslucentStatusBarView(Activity activity, int alpha) {
         // 绘制一个和状态栏一样高的矩形
