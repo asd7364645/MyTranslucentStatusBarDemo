@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_transparent_img"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.alexleo.mytranslucentstatusbardemo.TransparentImgAct">
+
+    <ImageView
+        android:src="@mipmap/hzw1"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.v7.widget.Toolbar
+        android:background="#88000086"
+        android:id="@+id/transparent_img_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"/>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.alexleo.mytranslucentstatusbardemo.MainActivity">
+
+    <Button
+        android:id="@+id/main_go_bohe"
+        android:text="@string/transucent_bohe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:padding="2dp"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimary"
+        android:text="其他解决方案,StatusBarUtils方案"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/main_go_putongtoolbar"
+        android:text="普通toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/main_go_transparentimg"
+        android:text="图片透明状态栏demo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/main_go_scrollingimgtranslucent"
+        android:text="透明状态滑动"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>
