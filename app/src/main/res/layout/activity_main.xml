@@ -30,6 +30,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:id="@+id/main_go_drawer_translucent"
+        android:text="图片透明状态栏demo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
         android:id="@+id/main_go_scrollingimgtranslucent"
         android:text="透明状态滑动"
         android:layout_width="match_parent"

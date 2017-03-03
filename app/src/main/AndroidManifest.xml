@@ -15,15 +15,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".BoHeTranslucent"
-            android:theme="@style/NoActionBar" />
+        <activity android:name=".BoHeTranslucent" />
         <activity
             android:name=".ScrollingImgTranslucentActivity"
-            android:label="@string/title_activity_scrolling_img_translucent"
-            android:theme="@style/NoActionBar" />
+            android:label="@string/title_activity_scrolling_img_translucent" />
         <activity android:name=".PuTongToolBarTranslucent" />
-        <activity android:name=".TransparentImgAct"></activity>
+        <activity android:name=".TransparentImgAct" />
+        <activity
+            android:name=".DrawerLayoutAct"
+            android:label="@string/title_activity_drawer_layout"></activity>
     </application>
 
 </manifest>

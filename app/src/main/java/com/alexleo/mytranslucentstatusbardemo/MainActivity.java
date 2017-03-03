@@ -1,6 +1,7 @@
 package com.alexleo.mytranslucentstatusbardemo;
 
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button main_go_bohe,main_go_scrollingimgtranslucent
-            ,main_go_putongtoolbar,main_go_transparentimg;
+            ,main_go_putongtoolbar,main_go_transparentimg,main_go_drawer_translucent;
     private Intent intent;
 
     @Override
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         main_go_bohe = (Button) findViewById(R.id.main_go_bohe);
+        main_go_drawer_translucent = (Button) findViewById(R.id.main_go_drawer_translucent);
         main_go_putongtoolbar = (Button) findViewById(R.id.main_go_putongtoolbar);
         main_go_transparentimg = (Button) findViewById(R.id.main_go_transparentimg);
         main_go_scrollingimgtranslucent = (Button) findViewById(R.id.main_go_scrollingimgtranslucent);
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         main_go_scrollingimgtranslucent.setOnClickListener(this);
         main_go_transparentimg.setOnClickListener(this);
         main_go_putongtoolbar.setOnClickListener(this);
+        main_go_drawer_translucent.setOnClickListener(this);
     }
 
     @Override
@@ -35,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.main_go_putongtoolbar:
                 intent = new Intent(this,PuTongToolBarTranslucent.class);
+                startActivity(intent);
+                break;
+            case R.id.main_go_drawer_translucent:
+                intent = new Intent(this,DrawerLayoutAct.class);
                 startActivity(intent);
                 break;
             case R.id.main_go_transparentimg:

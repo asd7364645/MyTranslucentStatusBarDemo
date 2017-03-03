@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_transparent_img"
@@ -15,9 +15,16 @@
         android:layout_height="match_parent" />
 
     <android.support.v7.widget.Toolbar
-        android:background="#88000086"
+        android:fitsSystemWindows="true"
         android:id="@+id/transparent_img_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?android:actionBarSize"/>
+        android:layout_height="wrap_content"/>
 
-</android.support.design.widget.CoordinatorLayout>
+    <SeekBar
+        android:layout_centerInParent="true"
+        android:id="@+id/transparent_img_seek_bar"
+        android:max="255"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
