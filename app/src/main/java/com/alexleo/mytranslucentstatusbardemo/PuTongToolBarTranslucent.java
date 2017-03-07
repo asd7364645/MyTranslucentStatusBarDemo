@@ -23,13 +23,13 @@ public class PuTongToolBarTranslucent extends AppCompatActivity {
         setContentView(R.layout.activity_pu_tong_tool_bar_translucent);
         pu_tong_toolbar = (Toolbar) findViewById(R.id.pu_tong_toolbar);
         setSupportActionBar(pu_tong_toolbar);
-        AlexStatusBarUtils.setStatusColor(this, Color.BLUE,122);
+        AlexStatusBarUtils.setStatusColor(this, Color.GREEN,122);
         pu_tong_seek_bar = (SeekBar) findViewById(R.id.pu_tong_seek_bar);
         pu_tong_seek_bar.setProgress(122);
         pu_tong_seek_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                AlexStatusBarUtils.setStatusColor(PuTongToolBarTranslucent.this, getResources().getColor(R.color.colorPrimary),i);
+                AlexStatusBarUtils.setStatusColor(PuTongToolBarTranslucent.this, Color.GREEN,i);
                 System.out.println("i = " + i);
             }
 

@@ -23,7 +23,8 @@
         <activity android:name=".TransparentImgAct" />
         <activity
             android:name=".DrawerLayoutAct"
-            android:label="@string/title_activity_drawer_layout"></activity>
+            android:label="@string/title_activity_drawer_layout" />
+        <activity android:name=".FragmentStatusAct"></activity>
     </application>
 
 </manifest>
