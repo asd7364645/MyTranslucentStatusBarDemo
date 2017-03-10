@@ -45,11 +45,16 @@ public class AlexStatusBarUtils {
         }
     }
 
+    public static void setStatusColor(Activity activity, @ColorInt int color) {
+        setStatusColor(activity, color, 0);
+    }
+
     /**
      * 设置普通toolbar中状态栏透明度
      *
      * @param activity
      * @param statusBarAlpha
+     * @deprecated 很少会用到这个
      */
     public static void setStatusAlpha(Activity activity, int statusBarAlpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -260,6 +265,7 @@ public class AlexStatusBarUtils {
     /**
      * 在有fragment的activity中使用
      * 注：需要在有状态栏的fragment的最顶端加一个状态栏大小的view
+     *
      * @param activity
      * @param alpha
      */

@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.alexleo.mytranslucentstatusbardemo.DrawerLayoutAct">
+    tools:context="com.alexleo.mytranslucentstatusbardemo.DrawerLayoutAct"
+    tools:openDrawer="left">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/drawer_act_coordinator"
@@ -16,13 +17,16 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent">
+            android:background="@android:color/transparent"
+            >
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/drawer_act_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
                 app:layout_scrollFlags="scroll"
+                android:fitsSystemWindows="true"
                 app:title="@string/app_name" />
 
             <android.support.design.widget.TabLayout

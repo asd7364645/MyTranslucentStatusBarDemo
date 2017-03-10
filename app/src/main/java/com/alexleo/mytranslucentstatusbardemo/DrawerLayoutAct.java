@@ -25,6 +25,7 @@ public class DrawerLayoutAct extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_layout);
+
         drawer_act_toolbar = (Toolbar) findViewById(R.id.drawer_act_toolbar);
         drawer_act_tab = (TabLayout) findViewById(R.id.drawer_act_tab);
         activity_drawer_layout = (DrawerLayout) findViewById(R.id.activity_drawer_layout);
@@ -33,21 +34,21 @@ public class DrawerLayoutAct extends AppCompatActivity implements NavigationView
         drawer_act_coordinator = (CoordinatorLayout) findViewById(R.id.drawer_act_coordinator);
 
         setSupportActionBar(drawer_act_toolbar);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this,activity_drawer_layout,drawer_act_toolbar,R.string.OPEN,R.string.CLOSE);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, activity_drawer_layout, drawer_act_toolbar, R.string.OPEN, R.string.CLOSE);
         activity_drawer_layout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
         drawer_act_nv_view.setNavigationItemSelectedListener(this);
 
 //        AlexStatusBarUtils.setDrawerStatusColor(this,0);
-//        AlexStatusBarUtils.setDrawerStatusColor(this,drawer_act_coordinator,0);
-        AlexStatusBarUtils.setDrawerStatusColor(this,activity_drawer_layout,getResources().getColor(R.color.colorAccent),0);
+        AlexStatusBarUtils.setDrawerStatusColor(this,drawer_act_coordinator,0);
+//        AlexStatusBarUtils.setDrawerStatusColor(this,activity_drawer_layout,getResources().getColor(R.color.colorAccent),0);
         drawer_act_seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 //                AlexStatusBarUtils.setDrawerStatusColor(DrawerLayoutAct.this,progress);
-//                AlexStatusBarUtils.setDrawerStatusColor(DrawerLayoutAct.this,drawer_act_coordinator,progress);
-                AlexStatusBarUtils.setDrawerStatusColor(DrawerLayoutAct.this,activity_drawer_layout,getResources().getColor(R.color.colorAccent),progress);
+                AlexStatusBarUtils.setDrawerStatusColor(DrawerLayoutAct.this,drawer_act_coordinator,progress);
+//                AlexStatusBarUtils.setDrawerStatusColor(DrawerLayoutAct.this,activity_drawer_layout,getResources().getColor(R.color.colorAccent),progress);
             }
 
             @Override
