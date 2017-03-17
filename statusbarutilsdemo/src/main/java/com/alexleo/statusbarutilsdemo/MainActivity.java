@@ -156,7 +156,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void setStatusBar() {
-        mStatusBarColor = getResources().getColor(R.color.colorPrimary);
+        mStatusBarColor = getResources().getColor(R.color.colorAccent);
         StatusBarUtil.setColorForDrawerLayout(this, (DrawerLayout) findViewById(R.id.drawer_layout), mStatusBarColor, mAlpha);
     }
 }

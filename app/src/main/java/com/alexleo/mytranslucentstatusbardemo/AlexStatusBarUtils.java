@@ -26,6 +26,9 @@ public class AlexStatusBarUtils {
     private static final int FAKE_STATUS_VIEW = R.id.status_view;
     private static final int FAKE_TRANSLUCENT_VIEW_ID = R.id.translucent_view;
 
+
+    //------------单色明暗度状态栏------------
+
     /**
      * 设置普通toolbar中状态栏颜色
      *
@@ -50,33 +53,15 @@ public class AlexStatusBarUtils {
     }
 
     /**
-     * 设置普通toolbar中状态栏透明度
-     *
-     * @param activity
-     * @param statusBarAlpha
-     * @deprecated 很少会用到这个
-     */
-    public static void setStatusAlpha(Activity activity, int statusBarAlpha) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            activity.getWindow().setStatusBarColor(Color.argb(statusBarAlpha, 0, 0, 0));
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            setTranslucentStatusViewToAct(activity, statusBarAlpha);
-            setRootView(activity);
-        }
-    }
-
-    /**
      * 设置toolbar带drawerLayout状态栏透明度,5.0以上使用默认系统的第二颜色colorPrimaryDark
      * 但是drawerLayout打开的时候会有一条statusbar高度的半透明条
      * 注：必须将drawerLayout设置android:fitsSystemWindows="true"
+     * 一般不要设置滑动toolbar,在4.4系统会有问题，下部如果有tablayout会遮挡
      *
      * @param activity
      * @param statusBarAlpha
      */
-    public static void setDrawerStatusColor(Activity activity, int statusBarAlpha) {
+    public static void setDrawerStatusAlpha(Activity activity, int statusBarAlpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -94,26 +79,39 @@ public class AlexStatusBarUtils {
      * 设置toolbar带drawerLayout状态栏透明度,5.0以上使用默认系统的第二颜色colorPrimaryDark
      * 但是drawerLayout打开的时候会有一条statusbar高度的半透明条
      * 注：必须将drawerLayout设置android:fitsSystemWindows="true"
+     * CoordinatorLayout设置背景颜色
+     * 下边内容布局设置背景颜色
      *
      * @param activity
-     * @param statusBarAlpha
      */
-    public static void setDrawerStatusColor(Activity activity, CoordinatorLayout coordinatorLayout, int statusBarAlpha) {
+    public static void setScrollDrawerStatus(Activity activity, CoordinatorLayout coordinatorLayout) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            activity.getWindow().setStatusBarColor(Color.argb(statusBarAlpha, 0, 0, 0));
+            activity.getWindow().setStatusBarColor(Color.argb(0, 0, 0, 0));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             ViewGroup contentLayout = (ViewGroup) activity.findViewById(android.R.id.content);
             contentLayout.getChildAt(0).setFitsSystemWindows(false);
             coordinatorLayout.setFitsSystemWindows(true);
-            setTranslucentStatusViewToAct(activity, statusBarAlpha);
+            View mStatusBarView = contentLayout.getChildAt(0);
+            //改变颜色时避免重复添加statusBarView
+            if (mStatusBarView != null && mStatusBarView.getMeasuredHeight() == getStatusBarHeight(activity)) {
+                return;
+            }
+            mStatusBarView = new View(activity);
+            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    getStatusBarHeight(activity));
+            contentLayout.addView(mStatusBarView, lp);
+
         }
     }
 
     /**
-     * 设置普通toolbar带drawerLayout状态栏颜色和透明度,不要把toolbar设置为可滑动
+     * 设置普通toolbar带drawerLayout状态栏
+     * 1.设置toolbar的颜色和颜色光暗度
+     * 2.drawerLayout的顶部透明度
+     * ,不要把toolbar设置为可滑动
      * 注：必须将drawerLayout设置android:fitsSystemWindows="true"
      *
      * @param activity
@@ -155,59 +153,6 @@ public class AlexStatusBarUtils {
     }
 
     /**
-     * CollapsingToolbarLayout状态栏(可折叠图片)
-     *
-     * @param activity
-     * @param coordinatorLayout
-     * @param appBarLayout
-     * @param imageView
-     * @param toolbar
-     */
-    public static void setCollapsingToolbar(Activity activity, CoordinatorLayout coordinatorLayout,
-                                            AppBarLayout appBarLayout, ImageView imageView, Toolbar toolbar) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            appBarLayout.setFitsSystemWindows(true);
-            imageView.setFitsSystemWindows(true);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            coordinatorLayout.setFitsSystemWindows(false);
-            appBarLayout.setFitsSystemWindows(false);
-            imageView.setFitsSystemWindows(false);
-            toolbar.setFitsSystemWindows(true);
-            CollapsingToolbarLayout.LayoutParams lp = (CollapsingToolbarLayout.LayoutParams) toolbar.getLayoutParams();
-            lp.height = (int) (getStatusBarHeight(activity) +
-                    activity.getResources().getDimension(R.dimen.abc_action_bar_default_height_material));
-            toolbar.setLayoutParams(lp);
-
-            setTranslucentStatusViewToAct(activity, 0);
-            setCollapsingToolbarStatus(activity, appBarLayout);
-        }
-    }
-
-    /**
-     * Android4.4上CollapsingToolbar折叠时statusBar显示和隐藏
-     *
-     * @param appBarLayout
-     */
-    private static void setCollapsingToolbarStatus(Activity activity, AppBarLayout appBarLayout) {
-        ViewGroup contentView = (ViewGroup) activity.findViewById(android.R.id.content);
-        final View fakeTranslucentView = contentView.findViewById(FAKE_TRANSLUCENT_VIEW_ID);
-        ViewCompat.setAlpha(fakeTranslucentView, 1);
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                int maxScroll = appBarLayout.getTotalScrollRange();
-                float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
-                ViewCompat.setAlpha(fakeTranslucentView, percentage);
-            }
-        });
-    }
-
-
-    /**
      * 隐藏statusView
      *
      * @param activity
@@ -221,6 +166,27 @@ public class AlexStatusBarUtils {
         View fakeTranslucentView = decorView.findViewById(FAKE_TRANSLUCENT_VIEW_ID);
         if (fakeTranslucentView != null) {
             fakeTranslucentView.setVisibility(View.GONE);
+        }
+    }
+
+    //----------透明状态栏，可调整透明度-------------
+
+    /**
+     * 设置普通toolbar中状态栏透明度
+     * 弃用
+     * @param activity
+     * @param statusBarAlpha
+     * @deprecated 很少会用到这个
+     */
+    public static void setStatusAlpha(Activity activity, int statusBarAlpha) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            activity.getWindow().setStatusBarColor(Color.argb(statusBarAlpha, 0, 0, 0));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            setTranslucentStatusViewToAct(activity, statusBarAlpha);
+            setRootView(activity);
         }
     }
 
@@ -272,6 +238,62 @@ public class AlexStatusBarUtils {
     public static void setTranslucentForImageViewInFragment(Activity activity, int alpha) {
         setImageViewTranslucent(activity, alpha);
     }
+
+
+
+
+    /**
+     * CollapsingToolbarLayout状态栏(可折叠图片)
+     *
+     * @param activity
+     * @param coordinatorLayout
+     * @param appBarLayout
+     * @param imageView
+     * @param toolbar
+     */
+    public static void setCollapsingToolbar(Activity activity, CoordinatorLayout coordinatorLayout,
+                                            AppBarLayout appBarLayout, ImageView imageView, Toolbar toolbar) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            appBarLayout.setFitsSystemWindows(true);
+            imageView.setFitsSystemWindows(true);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            coordinatorLayout.setFitsSystemWindows(false);
+            appBarLayout.setFitsSystemWindows(false);
+            imageView.setFitsSystemWindows(false);
+            toolbar.setFitsSystemWindows(true);
+            CollapsingToolbarLayout.LayoutParams lp = (CollapsingToolbarLayout.LayoutParams) toolbar.getLayoutParams();
+            lp.height = (int) (getStatusBarHeight(activity) +
+                    activity.getResources().getDimension(R.dimen.abc_action_bar_default_height_material));
+            toolbar.setLayoutParams(lp);
+
+            setTranslucentStatusViewToAct(activity, 0);
+//            setCollapsingToolbarStatus(activity, appBarLayout);
+        }
+    }
+
+    /**
+     * Android4.4上CollapsingToolbar折叠时statusBar显示和隐藏
+     *
+     * @param appBarLayout
+     */
+    private static void setCollapsingToolbarStatus(Activity activity, AppBarLayout appBarLayout) {
+        ViewGroup contentView = (ViewGroup) activity.findViewById(android.R.id.content);
+        final View fakeTranslucentView = contentView.findViewById(FAKE_TRANSLUCENT_VIEW_ID);
+        ViewCompat.setAlpha(fakeTranslucentView, 1);
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                int maxScroll = appBarLayout.getTotalScrollRange();
+                float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
+                ViewCompat.setAlpha(fakeTranslucentView, percentage);
+            }
+        });
+    }
+
 
     //----------------私有方法----------------------
 
@@ -395,6 +417,7 @@ public class AlexStatusBarUtils {
         green = (int) (green * a + 0.5);
         blue = (int) (blue * a + 0.5);
         return 0xff << 24 | red << 16 | green << 8 | blue;
+//        return Color.argb(alpha,Color.red(color),Color.green(color),Color.blue(color));
     }
 
     /**

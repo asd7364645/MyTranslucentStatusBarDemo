@@ -40,14 +40,14 @@ public class DrawerLayoutAct extends AppCompatActivity implements NavigationView
 
         drawer_act_nv_view.setNavigationItemSelectedListener(this);
 
-//        AlexStatusBarUtils.setDrawerStatusColor(this,0);
-        AlexStatusBarUtils.setDrawerStatusColor(this,drawer_act_coordinator,0);
+        AlexStatusBarUtils.setDrawerStatusAlpha(this,0);
+//        AlexStatusBarUtils.setDrawerStatusColor(this,drawer_act_coordinator);
 //        AlexStatusBarUtils.setDrawerStatusColor(this,activity_drawer_layout,getResources().getColor(R.color.colorAccent),0);
         drawer_act_seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                AlexStatusBarUtils.setDrawerStatusColor(DrawerLayoutAct.this,progress);
-                AlexStatusBarUtils.setDrawerStatusColor(DrawerLayoutAct.this,drawer_act_coordinator,progress);
+                AlexStatusBarUtils.setDrawerStatusAlpha(DrawerLayoutAct.this,progress);
+//                AlexStatusBarUtils.setDrawerStatusColor(DrawerLayoutAct.this,drawer_act_coordinator);
 //                AlexStatusBarUtils.setDrawerStatusColor(DrawerLayoutAct.this,activity_drawer_layout,getResources().getColor(R.color.colorAccent),progress);
             }
 

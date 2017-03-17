@@ -44,6 +44,11 @@
         android:text="fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/main_go_wangyi"
+        android:text="网易云音乐demo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 

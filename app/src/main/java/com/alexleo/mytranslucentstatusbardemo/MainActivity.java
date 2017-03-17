@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button main_go_bohe,main_go_scrollingimgtranslucent
             ,main_go_putongtoolbar,main_go_transparentimg,main_go_drawer_translucent
-            ,main_go_fragment;
+            ,main_go_fragment,main_go_wangyi;
     private Intent intent;
 
     @Override
@@ -20,11 +20,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         main_go_bohe = (Button) findViewById(R.id.main_go_bohe);
         main_go_drawer_translucent = (Button) findViewById(R.id.main_go_drawer_translucent);
         main_go_fragment = (Button) findViewById(R.id.main_go_fragment);
+        main_go_wangyi = (Button) findViewById(R.id.main_go_wangyi);
         main_go_putongtoolbar = (Button) findViewById(R.id.main_go_putongtoolbar);
         main_go_transparentimg = (Button) findViewById(R.id.main_go_transparentimg);
         main_go_scrollingimgtranslucent = (Button) findViewById(R.id.main_go_scrollingimgtranslucent);
         main_go_bohe.setOnClickListener(this);
         main_go_scrollingimgtranslucent.setOnClickListener(this);
+        main_go_wangyi.setOnClickListener(this);
         main_go_transparentimg.setOnClickListener(this);
         main_go_putongtoolbar.setOnClickListener(this);
         main_go_drawer_translucent.setOnClickListener(this);
@@ -56,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.main_go_fragment:
                 intent = new Intent(this,FragmentStatusAct.class);
+                startActivity(intent);
+                break;
+            case R.id.main_go_wangyi:
+                intent = new Intent(this,WangYiMusicDemo.class);
                 startActivity(intent);
                 break;
         }

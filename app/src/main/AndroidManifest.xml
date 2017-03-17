@@ -24,7 +24,8 @@
         <activity
             android:name=".DrawerLayoutAct"
             android:label="@string/title_activity_drawer_layout" />
-        <activity android:name=".FragmentStatusAct"></activity>
+        <activity android:name=".FragmentStatusAct" />
+        <activity android:name=".WangYiMusicDemo" android:theme="@style/MyyAppTheme"></activity>
     </application>
 
 </manifest>
